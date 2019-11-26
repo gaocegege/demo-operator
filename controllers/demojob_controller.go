@@ -18,7 +18,6 @@ package controllers
 import (
 	"context"
 
-	"github.com/caicloud/mlneuron-controller/pkg/util"
 	"github.com/go-logr/logr"
 	batchv1 "k8s.io/api/batch/v1"
 	corev1 "k8s.io/api/core/v1"
@@ -65,9 +64,6 @@ func (r *DemoJobReconciler) Reconcile(req ctrl.Request) (ctrl.Result, error) {
 			Namespace: instance.Namespace,
 		},
 		Spec: batchv1.JobSpec{
-			Completions:  util.NewInt32(1),
-			BackoffLimit: util.NewInt32(0),
-			// TTLSecondsAfterFinished: util.NewInt32(0),
 			Template: corev1.PodTemplateSpec{
 				Spec: corev1.PodSpec{
 					RestartPolicy: corev1.RestartPolicyNever,
